@@ -1,0 +1,89 @@
+# package files related to generating random number and for evaluating expression
+
+
+import random
+import time
+
+
+# array of operators
+OPERATORS = ["+", "-", "*"]
+
+# minimum value for operand
+MIN_OPERAND = 3
+
+# maximum value for operand -> beginner level
+MAX_OPERAND = 12
+
+# total problems for the user
+TOTAL_PROBLEMS = 3
+
+
+# function to create expression
+def generate_problem():
+
+    # generating operands and operators using random function
+
+    # left operand
+    left = random.randint(MIN_OPERAND, MAX_OPERAND)
+
+    # right operand
+    right = random.randint(MIN_OPERAND, MAX_OPERAND)
+
+    # operator
+    operator = random.choice(OPERATORS)
+
+    # printing the expression
+    expr = str(left) + " " + operator + " " + str(right)
+
+    # evaluating the answer using defined function
+    answer = eval(expr)
+
+    # function returns the expression and evaluated answer
+    return expr, answer
+
+# counter for correct and wrong answers
+wrong = 0
+correctAns  = 0
+input("Press enter to start!")
+print("----------------------")
+
+# time function provided in python
+start_time = time.time()
+
+# loop to iterate the no of problems or questions
+for i in range(TOTAL_PROBLEMS):
+    #paasing parameters or values to the function
+    expr, answer = generate_problem()
+    
+    while True:
+        # printing the expression for user
+        guess = input("Problem #" + str(i + 1) + ": " + expr + " = ")
+
+        # if made right guess break and move on to the next expression
+        if guess == str(answer):
+            correctAns = correctAns + 1
+            break
+
+        # else increment the wrong answer count
+        else:
+            wrong = wrong + 1
+        
+
+
+end_time = time.time()
+
+# calculating the time taken by the user to complete the quiz
+total_time = round(end_time - start_time, 2)
+
+print("----------------------")
+
+# printing the result
+print("Nice work! You finished in", total_time, "seconds!")
+print("------------------------------------")
+print("Score : ")
+print("------------------------------------")
+print("Correct Answers : ")
+print(correctAns)
+print("Wrong Answers : ")
+print(wrong)
+
